@@ -15,6 +15,8 @@ public class App {
 		while(scan.hasNextLine()) {
 			String linea = scan.nextLine();
 			String[] partes = linea.split(";");
+			String id = partes[0];
+			String nrc = partes[1];
 		}
 		
 	}
@@ -23,22 +25,32 @@ public class App {
 		while(scan.hasNextLine()) {
 			String linea = scan.nextLine();
 			String[] partes = linea.split(";");
+			String id = partes[0];
+			String nombre = partes[1];
+			String descripcion = partes[2];
+			int requisitos = Integer.valueOf(partes[3]);
+			int validez = Integer.valueOf(partes[4]);
+			
 		}
 		
 	}
-	public static void abrircursos() throws FileNotFoundException {
-		Scanner scan = new Scanner(new File("cursos.txt"));
-		while(scan.hasNextLine()) {
-			String linea = scan.nextLine();
-			String[] partes = linea.split(";");
-		}
-		
-	}
+
 	public static void abrirCursos() throws FileNotFoundException {
 		Scanner scan = new Scanner(new File("cursosS.txt"));
 		while(scan.hasNextLine()) {
 			String linea = scan.nextLine();
 			String[] partes = linea.split(";");
+			String nrc = partes[0];
+			String nombreCurso = partes[1];
+			int semestre = Integer.valueOf(partes[2]);
+			int creditos = Integer.valueOf(partes[3]);
+			String area = partes[4];
+			String nrcPrerequisito = "";
+			if(partes.length == 6) {
+				nrcPrerequisito = partes[5];
+			}
+			
+			
 		}
 		
 	}
@@ -47,6 +59,12 @@ public class App {
 		while(scan.hasNextLine()) {
 			String linea = scan.nextLine();
 			String[] partes = linea.split(";");
+			String rut = partes[0];
+			String nombreEstudiante = partes[1];
+			String carreraEstudiante = partes[2];
+			int semestre = Integer.valueOf(partes[3]);
+			String correo = partes[4];
+			String contraseña = partes[5];
 		}
 		
 	}
@@ -55,6 +73,11 @@ public class App {
 		while(scan.hasNextLine()) {
 			String linea = scan.nextLine();
 			String[] partes = linea.split(";");
+			String rut = partes[0];
+			String codigoAisgnatura = partes[1];
+			double calificacion = Double.valueOf(partes[2]);
+			String estado = partes[3];
+			String semestre = partes[4];
 		}
 		
 	}
@@ -63,6 +86,11 @@ public class App {
 		while(scan.hasNextLine()) {
 			String linea = scan.nextLine();
 			String[] partes = linea.split(";");
+			String rut = partes[0];
+			String idCertificacion = partes[1];
+			String fecha = partes[2];
+			String estado = partes[3];
+			int progreso = Integer.valueOf(partes[4]);
 		}
 		
 	}
@@ -71,6 +99,18 @@ public class App {
 		while(scan.hasNextLine()) {
 			String linea = scan.nextLine();
 			String[] partes = linea.split(";");
+			String nombreUsuario = partes[0];
+			String contraseña = partes[1];
+			String rol = partes[2];
+			String infoAdicional = "";
+			
+			
+			if(partes.length == 4) {
+				infoAdicional = partes[4];
+			
+				
+			}
+			
 		}
 		
 	}
