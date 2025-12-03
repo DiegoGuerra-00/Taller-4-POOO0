@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class App {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		GUI gui = new GUI();
 
 	}
 	public static void abrirAsignaturasCertificaciones() throws FileNotFoundException {
