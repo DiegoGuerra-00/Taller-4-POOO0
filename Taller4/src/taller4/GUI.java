@@ -8,13 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class GUI extends JFrame{
-	JFrame pantalla;
+	JFrame pantalla; // se usara para los metodos, se puede intepretar como si fuera un "private"
 	
-	JButton botonAdmin;
+	JButton botonAdmin;  // botones principales del menu
 	JButton botonCoordinador;
 	JButton botonEstudiante;
 	
-	JButton gestionUsuarios;
+	JButton gestionUsuarios; //botones que contendran los botones principales del menu, al hacer click en algun boton principal se accedera a alguno de estos 
 	JButton gestionCertificacion;
 	JButton panelMetricasYanalisis;
 	JButton gestionEstudiantes;
@@ -23,7 +23,7 @@ public class GUI extends JFrame{
 	JButton inscripcionCertificaciones;
 	JButton seguimientoProceso;
 	
-	public GUI() {
+	public GUI() { // creacion de la gui
 		pantalla = new JFrame();
 		
 		botonAdmin = new JButton();
@@ -36,7 +36,7 @@ public class GUI extends JFrame{
 		pantalla.setTitle("ACADEMI CORE");
 		pantalla.setLayout(null);
 		
-		botonAdmin.setBounds(1,50,200,30);
+		botonAdmin.setBounds(1,50,200,30);    // creacion de botones principales
 		botonAdmin.setText("MENÚ ADMINISTRADOR");
 		
 		botonCoordinador.setBounds(2,100,200,30);
@@ -49,12 +49,12 @@ public class GUI extends JFrame{
 		pantalla.add(botonCoordinador);
 		pantalla.add(botonEstudiante);
 		
-		mostrarGestionUsuario(botonAdmin);
+		mostrarGestionUsuario(botonAdmin);  // se despliega la info dentro del menu admin, en ella solo esta disponibe el boton gestion de usuarios
 
 	
 		
 	}
-	private void limpiarPantallaTOTAL() {
+	private void limpiarPantallaTOTAL() { // se usa cuando se usa el volver, limpia toda la pantalla y la deja como al principio
 		pantalla.getContentPane().removeAll();
 		pantalla.repaint();
 		pantalla.revalidate();
@@ -62,28 +62,28 @@ public class GUI extends JFrame{
 		
 		
 		pantalla.add(botonAdmin);
-		pantalla.add(botonCoordinador);
+		pantalla.add(botonCoordinador);  // al limpiar la pantalla se "aregaran" los botones principales del menu"
 		pantalla.add(botonEstudiante);
 		
 		pantalla.repaint();
 		
 	}
-	private void mostrarGestionUsuario(JButton boton) {
+	private void mostrarGestionUsuario(JButton boton) { // muestra la opcion de gestion usuario del menu admin
 		boton.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) { 
 				limpiarPantalla();
 				gestionUsuarios = new JButton();
 				gestionUsuarios.setBounds(1,100,200,30);
-				gestionUsuarios.setText("Gestión de Usuarios");
+				gestionUsuarios.setText("Gestión de Usuarios"); // se crea un boton nuevo que contendra la info 
 				pantalla.add(gestionUsuarios);
 				
-				gestionUsuarios.addActionListener(new ActionListener() {
+				gestionUsuarios.addActionListener(new ActionListener() { // al accionar el boton se accede
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						limpiarPantalla();
+						limpiarPantalla();  // aqui estan todas las opcciones dentro del boton "Gestion de usuarios"
 						
 						JButton crearCuentasEstudianteCoorinador =  new JButton();
 						crearCuentasEstudianteCoorinador.setText("Crear cuentas de estudiante o coordinador");
@@ -101,10 +101,10 @@ public class GUI extends JFrame{
 						
 					
 						pantalla.add(crearCuentasEstudianteCoorinador);
-						pantalla.add(modificarcuentasEstudianteCoordinador);
+						pantalla.add(modificarcuentasEstudianteCoordinador); // esos botones se agegran a la pantalla
 						pantalla.add(eliminarCuentasEstudianteCoordinador);
 						pantalla.add(restablecerContraseñas);
-						volveR();
+						volveR(); // si se presiona volver, se "retorna" al estado "base"
 						
 
 						
@@ -117,12 +117,12 @@ public class GUI extends JFrame{
 		
 		
 	}
-	private void limpiarPantalla() {
+	private void limpiarPantalla() { // limpia la pantalla para agregar los nuevos botones, sirve tambien para limpiar la pantalla y agregar nueva info
 		pantalla.getContentPane().removeAll();
 		pantalla.repaint();
 		pantalla.revalidate();
 	}
-	private void volveR() {
+	private void volveR() {   // metodo para volver al apartado de menus
 		JButton volver = new JButton("Volver");
         volver.setBounds(10, 300, 100, 30);
         
