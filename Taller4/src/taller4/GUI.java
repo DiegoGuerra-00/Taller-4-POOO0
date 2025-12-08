@@ -43,7 +43,7 @@ public class GUI extends JFrame{
 		textoContraseña.setBounds(10,60,100,30);
 		pantalla.add(textoContraseña);
 		
-		JTextField contraseña = new JTextField();
+		JTextField contraseña = new JTextField();  //input para ingresar una contraseña
 		contraseña.setBounds(120,60,150,30);
 		pantalla.add(contraseña);
 		
@@ -55,14 +55,14 @@ public class GUI extends JFrame{
 		sesion.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				String contra = contraseña.getText();
-				String resultado= sistema.validarUsuario(contra);
-				
+				String contra = contraseña.getText(); // se guarda la contraseña ingresada
+				String resultado= sistema.validarUsuario(contra); // se llama el metodo del sistema, validando si es que la contraseña existe
+				                                 // a su vez, esta variable sera la principal de todo 
 				if(resultado.equalsIgnoreCase("Usuario no encontrado")) {
-					JOptionPane.showMessageDialog(pantalla,resultado); 
+					JOptionPane.showMessageDialog(pantalla,resultado); // si la contraseña no existe se anuncia
 
 				}else {
-					String usuatio = sistema.devolverTipoUsuario(contra);
+					String usuatio = sistema.devolverTipoUsuario(contra); //si la contraseña existe se verifica a que usuario existe y se accede al menu que le corresponde 
 					switch (usuatio) {
 					case "Coordinador":
 						mostrarMenuCoordinador(sesion);
@@ -75,8 +75,7 @@ public class GUI extends JFrame{
 						mostrarMenuEstudiante(sesion);
 						break;
 					}
-					
-					
+							
 				}//--
 				
 			}
@@ -100,9 +99,6 @@ public class GUI extends JFrame{
 		pantalla.repaint();
 		pantalla.revalidate();
 		
-		
-		
-	
 		pantalla.repaint();
 		
 	}
