@@ -6,13 +6,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class GUI extends JFrame{
-	JFrame pantalla; // se usara para los metodos, se puede intepretar como si fuera un "private"
+	private Sistema sistema;
+	static JFrame pantalla; // se usara para los metodos, se puede intepretar como si fuera un "private"
 	
-	JButton botonAdmin;  // botones principales del menu
-	JButton botonCoordinador;
-	JButton botonEstudiante;
+	
+
 	
 	JButton gestionUsuarios; //botones que contendran los botones principales del menu, al hacer click en algun boton principal se accedera a alguno de estos 
 	JButton gestionCertificacion;
@@ -23,37 +25,76 @@ public class GUI extends JFrame{
 	JButton inscripcionCertificaciones;
 	JButton seguimientoProceso;
 	
-	public GUI() { // creacion de la gui
+	JLabel tituloAdmin;
+	JLabel tituloCoordinador;
+	JLabel tituloEstudiante;
+
+	
+	public GUI(Sistema sistema ) { // creacion de la gui
 		pantalla = new JFrame();
 		
-		botonAdmin = new JButton();
-		botonCoordinador = new JButton();
-		botonEstudiante = new JButton();
-		
-		pantalla.setVisible(true);
-		pantalla.setBounds(400,400,400,400);
+	
+		pantalla.setBounds(100,200,350,200);
 		pantalla.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pantalla.setTitle("ACADEMI CORE");
 		pantalla.setLayout(null);
 		
-		botonAdmin.setBounds(1,50,200,30);    // creacion de botones principales
-		botonAdmin.setText("MENÚ ADMINISTRADOR");
+		JLabel textoContraseña = new JLabel("Contraseña:");
+		textoContraseña.setBounds(10,60,100,30);
+		pantalla.add(textoContraseña);
 		
-		botonCoordinador.setBounds(2,100,200,30);
-		botonCoordinador.setText("MENÚ COORDINADOR");
+		JTextField contraseña = new JTextField();
+		contraseña.setBounds(120,60,150,30);
+		pantalla.add(contraseña);
 		
-		botonEstudiante.setBounds(2,150,200,30);
-		botonEstudiante.setText("MENÚ ESTUDIANTE");
+		JButton sesion = new JButton("Iniciar sesión");
+		sesion.setBounds(100,110,120,30);
+		pantalla.add(sesion);
 		
-		pantalla.add(botonAdmin);
-		pantalla.add(botonCoordinador);
-		pantalla.add(botonEstudiante);
 		
-		mostrarGestionUsuario(botonAdmin);  // se despliega la info dentro del menu admin, en ella solo esta disponibe el boton gestion de usuarios
-		mostrarMenuCoordinador(botonCoordinador); // se despliega el menu del coordinador
-		mostrarMenuEstudiante(botonEstudiante);
+		sesion.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				String contra = contraseña.getText();
+				String resultado= sistema.validarUsuario(contra);
+				
+				if(resultado.equalsIgnoreCase("Usuario no encontrado")) {
+					JOptionPane.showMessageDialog(pantalla,resultado); 
+
+				}else {
+					String usuatio = sistema.devolverTipoUsuario(contra);
+					switch (usuatio) {
+					case "Coordinador":
+						mostrarMenuCoordinador(sesion);
+						break;
+
+					case "Admin":
+						mostrarGestionUsuario(sesion);
+						break;
+					case"Estudiante":
+						mostrarMenuEstudiante(sesion);
+						break;
+					}
+					
+					
+				}//--
+				
+			}
+		});
+		pantalla.setVisible(true);
+
+		
+
+
+
+//		
+//		mostrarGestionUsuario(botonAdmin);  // se despliega la info dentro del menu admin, en ella solo esta disponibe el boton gestion de usuarios
+//		mostrarMenuCoordinador(botonCoordinador); // se despliega el menu del coordinador
+//		mostrarMenuEstudiante(botonEstudiante);
 		
 	}
+
+	
 	private void limpiarPantallaTOTAL() { // se usa cuando se usa el volver, limpia toda la pantalla y la deja como al principio
 		pantalla.getContentPane().removeAll();
 		pantalla.repaint();
@@ -61,10 +102,7 @@ public class GUI extends JFrame{
 		
 		
 		
-		pantalla.add(botonAdmin);
-		pantalla.add(botonCoordinador);  // al limpiar la pantalla se "aregaran" los botones principales del menu"
-		pantalla.add(botonEstudiante);
-		
+	
 		pantalla.repaint();
 		
 	}
@@ -74,8 +112,15 @@ public class GUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) { 
 				limpiarPantalla();
+				pantalla.setBounds(200,200,600,600);
+				
+				
+				tituloAdmin = new JLabel("MENU ADMIN");
+				tituloAdmin.setBounds(10,-60,200,200);
+				pantalla.add(tituloAdmin);
+				
 				gestionUsuarios = new JButton();
-				gestionUsuarios.setBounds(1,100,200,30);
+				gestionUsuarios.setBounds(10,100,200,50);
 				gestionUsuarios.setText("Gestión de Usuarios"); // se crea un boton nuevo que contendra la info 
 				pantalla.add(gestionUsuarios);
 				
@@ -94,17 +139,16 @@ public class GUI extends JFrame{
 						JButton restablecerContraseñas =  new JButton();
 						restablecerContraseñas.setText("Restablecer contraseñas");
 
-						crearCuentasEstudianteCoorinador.setBounds(1,50,360,30);
-						modificarcuentasEstudianteCoordinador.setBounds(1,100,360,30);
-						eliminarCuentasEstudianteCoordinador.setBounds(1,200,360,30);
-						restablecerContraseñas.setBounds(1,250,360,30);
+						crearCuentasEstudianteCoorinador.setBounds(10,30,360,50);
+						modificarcuentasEstudianteCoordinador.setBounds(10,100,360,50);
+						eliminarCuentasEstudianteCoordinador.setBounds(10,170,360,50);
+						restablecerContraseñas.setBounds(10,240,360,50);
 						
 					
 						pantalla.add(crearCuentasEstudianteCoorinador);
 						pantalla.add(modificarcuentasEstudianteCoordinador); // esos botones se agegran a la pantalla
 						pantalla.add(eliminarCuentasEstudianteCoordinador);
 						pantalla.add(restablecerContraseñas);
-						volveInicio(); // si se presiona volver, se "retorna" al estado "base"
 						volverMENUADMIN();
 
 						
@@ -120,42 +164,48 @@ public class GUI extends JFrame{
 	
 	private void mostrarMenuCoordinador(JButton boton) {
 		boton.addActionListener(new ActionListener() {
-			
+	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				limpiarPantalla();
+				pantalla.setBounds(200,200,600,600);
+
+
+				tituloCoordinador = new JLabel("MENU COORDINADOR");
+				tituloCoordinador.setBounds(10,-60,200,200);
+				pantalla.add(tituloCoordinador);
+				
 				gestionCertificacion = new JButton(); // boton certificacion
-				gestionCertificacion.setBounds(1,100,200,30);
+				gestionCertificacion.setBounds(10,50,200,50);
 				gestionCertificacion.setText("Gestión de Certificaciones");
 				
 				panelMetricasYanalisis = new JButton(); // boton metricas y analisis
-				panelMetricasYanalisis.setBounds(1,150,200,30);
+				panelMetricasYanalisis.setBounds(10,146,200,50);
 				panelMetricasYanalisis.setText("Panel de Métricas y Análisis");
 				
 				gestionEstudiantes = new JButton(); //boton gestion estudiantes
-				gestionEstudiantes.setBounds(1,200,200,30);
+				gestionEstudiantes.setBounds(10,240,200,50);
 				gestionEstudiantes.setText("Gestión de Estudiantes");
 				
 				pantalla.add(gestionCertificacion);
 				pantalla.add(panelMetricasYanalisis);
 				pantalla.add(gestionEstudiantes);
-				
 				gestionCertificacion.addActionListener(new ActionListener() {// se accede a las opciones de gestion y certificacion
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						limpiarPantalla();// se limpia pantalla y se crean los botones de la opcion gestion certificacion
 						JButton modificarLineaCertificacion = new JButton();
-						modificarLineaCertificacion.setBounds(1,100,360,30);
+						modificarLineaCertificacion.setBounds(10,100,360,50);
 						modificarLineaCertificacion.setText("Modificar línea de certificación");
 						
 						JButton generarCertificadoEstudiantesComp = new JButton();
-						generarCertificadoEstudiantesComp.setBounds(1,150,360,30);
+						generarCertificadoEstudiantesComp.setBounds(10,180,360,50);
 						generarCertificadoEstudiantesComp.setText("Generar certificados de estudiantes que hayan completado la línea de certificación");
 						
 						pantalla.add(modificarLineaCertificacion);
 						pantalla.add(generarCertificadoEstudiantesComp);
-						volveInicio(); // vuelve al principio
 						volverMenuCoordinador(); // vuelve al menu coordinador
 					}
 				});//-----------------
@@ -166,16 +216,15 @@ public class GUI extends JFrame{
 					public void actionPerformed(ActionEvent e) {
 						limpiarPantalla(); // se limpia la pantalla
 						JButton mostrarEstadisticasInscripciones = new JButton();
-						mostrarEstadisticasInscripciones.setBounds(1,100,360,30);
+						mostrarEstadisticasInscripciones.setBounds(10,100,360,50);
 						mostrarEstadisticasInscripciones.setText("Mostrar estadísticas de inscripciones de línea de certificación");
 						
 						JButton analisisAsignaturasCriticas = new JButton();
-						analisisAsignaturasCriticas.setBounds(1,150,360,30);
+						analisisAsignaturasCriticas.setBounds(10,200,360,50);
 						analisisAsignaturasCriticas.setText("Análisis de asignaturas críticas en la línea de certificación");
 						
 						pantalla.add(mostrarEstadisticasInscripciones);
 						pantalla.add(analisisAsignaturasCriticas);
-						volveInicio();
 						volverMenuCoordinador(); // vuelve al menu coordinador
 
 					
@@ -189,24 +238,19 @@ public class GUI extends JFrame{
 						limpiarPantalla();
 						
 						JButton consultarPerfilesCompletos = new JButton();
-						consultarPerfilesCompletos.setBounds(1,100,360,30);
+						consultarPerfilesCompletos.setBounds(10,100,360,50);
 						consultarPerfilesCompletos.setText("Consultar perfiles completos de estudiantes de la línea de certificación");
 						
 						JButton revisaryValidarAvances = new JButton();
-						revisaryValidarAvances.setBounds(1,150,360,30);
+						revisaryValidarAvances.setBounds(10,180,360,50);
 						revisaryValidarAvances.setText("Revisar y validar avances académicos");
 						
 						pantalla.add(consultarPerfilesCompletos);
 						pantalla.add(revisaryValidarAvances);
-						volveInicio();
 						volverMenuCoordinador(); // vuelve al menu coordinador
 
 					}
 				});//--------------------
-				
-				
-
-				
 				
 				
 				
@@ -221,21 +265,27 @@ public class GUI extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				pantalla.setBounds(200,200,600,600);
+
 				limpiarPantalla();
+				tituloEstudiante = new JLabel("MENU ESTUDIANTE");
+				tituloEstudiante.setBounds(10,-60,200,200);
+				pantalla.add(tituloEstudiante);
+				
 				perfilEstudiante = new JButton();
-				perfilEstudiante.setBounds(1,100,200,30);
+				perfilEstudiante.setBounds(10,50,200,50);
 				perfilEstudiante.setText("Perfil del Estudiante");
 				
 				mallaCurricular = new JButton();
-				mallaCurricular.setBounds(1,150,200,30);
+				mallaCurricular.setBounds(10,120,200,50);
 				mallaCurricular.setText("Malla Curricular Interactiva");
 				
 				inscripcionCertificaciones = new  JButton();
-				inscripcionCertificaciones.setBounds(1,200,200,30);
+				inscripcionCertificaciones.setBounds(10,196,200,50);
 				inscripcionCertificaciones.setText("Inscripción a Certificaciones");
 				
 				seguimientoProceso = new JButton();
-				seguimientoProceso.setBounds(1,250,200,30);
+				seguimientoProceso.setBounds(10,269,200,50);
 				seguimientoProceso.setText("Seguimiento de Progreso");
 				
 				
@@ -251,21 +301,21 @@ public class GUI extends JFrame{
 						limpiarPantalla();
 						
 						JButton visualizarInformacionPersonalCompleta = new JButton();
-						visualizarInformacionPersonalCompleta.setBounds(1,100,360,30);
+						visualizarInformacionPersonalCompleta.setBounds(10,50,360,50);
 						visualizarInformacionPersonalCompleta.setText("Visualizar información personal completa");
 						
 						JButton mostrarMallaCurricularasg = new JButton();
-						mostrarMallaCurricularasg.setBounds(1,150,360,30);
+						mostrarMallaCurricularasg.setBounds(10,130,360,50);
 						mostrarMallaCurricularasg.setText("Mostrar malla curricular con asignaturas aprobadas, reprobadas y pendientes");
 						
 						JButton calcularMostrarPromedioGeneral = new JButton();
-						calcularMostrarPromedioGeneral.setBounds(1,200,360,30);
+						calcularMostrarPromedioGeneral.setBounds(10,210,360,50);
 						calcularMostrarPromedioGeneral.setText("Calcular y mostrar promedio general y por semestre");
 						
 						pantalla.add(visualizarInformacionPersonalCompleta);
 						pantalla.add(mostrarMallaCurricularasg);
 						pantalla.add(calcularMostrarPromedioGeneral);
-						volveInicio();
+					
 						volverMenuEstudiante(); // vuelve al menu estudiante
 
 					}
@@ -278,15 +328,15 @@ public class GUI extends JFrame{
 						limpiarPantalla();
 						
 						JButton visualizarGraficaSemestral = new  JButton();
-						visualizarGraficaSemestral.setBounds(1,100,360,30);
+						visualizarGraficaSemestral.setBounds(10,50,360,50);
 						visualizarGraficaSemestral.setText("Visualización gráfica de la malla curricular por semestres");
 						
 						JButton indicadorVisualAsignaturas = new JButton();
-						indicadorVisualAsignaturas.setBounds(1,150,360,30);
+						indicadorVisualAsignaturas.setBounds(10,130,360,50);
 						indicadorVisualAsignaturas.setText("Indicadores visuales de estado de asignaturas (colores diferentes)");
 						
 						JButton infoDetalladaPorAsignatura = new JButton();
-						infoDetalladaPorAsignatura.setBounds(1,200,360,30);
+						infoDetalladaPorAsignatura.setBounds(10,210,360,50);
 						infoDetalladaPorAsignatura.setText("Información detallada al hacer clic en cada asignatura");
 						
 						
@@ -294,7 +344,6 @@ public class GUI extends JFrame{
 						pantalla.add(indicadorVisualAsignaturas);
 						pantalla.add(infoDetalladaPorAsignatura);
 
-						volveInicio();
 						volverMenuEstudiante(); // vuelve al menu estudiante
 
 						
@@ -308,19 +357,19 @@ public class GUI extends JFrame{
 						limpiarPantalla();
 						
 						JButton listarLineasCertificacion = new JButton();
-						listarLineasCertificacion.setBounds(1,100,360,30);
+						listarLineasCertificacion.setBounds(10,50,360,45);
 						listarLineasCertificacion.setText("Listar líneas de certificación disponibles");
 						
 						JButton mostrarRequisitosDescp = new JButton();
-						mostrarRequisitosDescp.setBounds(1,150,360,30);
+						mostrarRequisitosDescp.setBounds(10,130,360,45);
 						mostrarRequisitosDescp.setText("Mostrar requisitos y descripción de cada línea");
 						
 						JButton procesoInscrpValidadcion = new JButton();
-						procesoInscrpValidadcion.setBounds(1,200,360,30);
+						procesoInscrpValidadcion.setBounds(10,210,360,45);
 						procesoInscrpValidadcion.setText("Proceso de inscripción con validaciones");
 						
 						JButton verificarPrerrequisito = new JButton();
-						verificarPrerrequisito.setBounds(1,250,360,30);
+						verificarPrerrequisito.setBounds(10,290,360,45);
 						verificarPrerrequisito.setText("Verificar prerrequisitos académicos");
 						
 						
@@ -328,7 +377,6 @@ public class GUI extends JFrame{
 						pantalla.add(mostrarRequisitosDescp);
 						pantalla.add(procesoInscrpValidadcion);
 						pantalla.add(verificarPrerrequisito);
-						volveInicio();
 						volverMenuEstudiante(); // vuelve al menu estudiante
 						
 					}
@@ -341,22 +389,21 @@ public class GUI extends JFrame{
 						limpiarPantalla();
 						
 						JButton dashboardPersonal = new JButton();
-						dashboardPersonal.setBounds(1,100,360,30);
+						dashboardPersonal.setBounds(10,50,360,50);
 						dashboardPersonal.setText("Dashboard personal con progreso en certificaciones inscritas");
 						
 						JButton aplicarVisitor = new JButton();
-						aplicarVisitor.setBounds(1,150,360,30);
+						aplicarVisitor.setBounds(10,130,360,30);
 						aplicarVisitor.setText("Aplicar Visitor para diferentes acciones según tipo de certificación");
 						
 						JButton mostrarAsignaturasPendientes = new JButton();
-						mostrarAsignaturasPendientes.setBounds(1,200,360,30);
+						mostrarAsignaturasPendientes.setBounds(10,210,360,50);
 						mostrarAsignaturasPendientes.setText("Mostrar asignaturas pendientes para completar certificaciones");
 						
 						
 						pantalla.add(dashboardPersonal);
 						pantalla.add(aplicarVisitor);
 						pantalla.add(mostrarAsignaturasPendientes);
-						volveInicio();
 						volverMenuEstudiante(); // vuelve al menu estudiante
 					}
 				});
@@ -379,16 +426,16 @@ public class GUI extends JFrame{
 	
 	
 	
-	private void volveInicio() {   // metodo para volver al apartado de menus
-		JButton volver = new JButton("Volver al incio");
-        volver.setBounds(10, 330, 250, 30);
-        
-       volver.addActionListener(ev -> {
-    	   limpiarPantallaTOTAL();
-       });
-       pantalla.add(volver);
-		
-	}
+//	private void volveInicio() {   // metodo para volver al apartado de menus
+//		JButton volver = new JButton("Volver al incio");
+//        volver.setBounds(20, 440, 250, 30);
+//        
+//       volver.addActionListener(ev -> {
+//    	   limpiarPantallaTOTAL();
+//       });
+//       pantalla.add(volver);
+//		
+//	}
 	
 	private void limpiarMenuAdmin() { //limpia el menu admin
 		pantalla.getContentPane().removeAll();
@@ -396,13 +443,14 @@ public class GUI extends JFrame{
 		pantalla.revalidate();
 		
 		pantalla.add(gestionUsuarios);
+		pantalla.add(tituloAdmin);
 		pantalla.repaint();
 		
 		
 	}
 	private void volverMENUADMIN() { //vuelve a las opciones del menu admin
 		JButton volver = new JButton("Volver");
-		volver.setBounds(20,300,250,20);
+		volver.setBounds(20,480,250,20);
 		volver.addActionListener(ev ->{
 			limpiarMenuAdmin();	
 		});
@@ -418,13 +466,15 @@ public class GUI extends JFrame{
 		pantalla.add(gestionCertificacion);
 		pantalla.add(panelMetricasYanalisis);
 		pantalla.add(gestionEstudiantes);
+		pantalla.add(tituloCoordinador);
+
 		
 		pantalla.repaint();
 	
 	}
 	private void volverMenuCoordinador() { //vuelve a las opciones del menu coordinador
 		JButton volver = new JButton("Volver");
-		volver.setBounds(20,300,250,20);
+		volver.setBounds(20,480,250,20);
 		volver.addActionListener(ev ->{
 			limpiarMenuCoordinador();	
 		});
@@ -440,13 +490,13 @@ public class GUI extends JFrame{
 		pantalla.add(mallaCurricular);
 		pantalla.add(inscripcionCertificaciones);
 		pantalla.add(seguimientoProceso);
-
+		pantalla.add(tituloEstudiante);
 		pantalla.repaint();
 		
 	}
 	private void volverMenuEstudiante() { //vuelve a las opciones del menu coordinador
 		JButton volver = new JButton("Volver");
-		volver.setBounds(20,300,250,20);
+		volver.setBounds(20,480,250,20);
 		volver.addActionListener(ev ->{
 			limpiarMenuEstudiante();	
 		});

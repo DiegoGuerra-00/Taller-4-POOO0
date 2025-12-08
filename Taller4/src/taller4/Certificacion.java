@@ -4,9 +4,9 @@ public class Certificacion {
 	private String id;
 	private String nombre;
 	private String descripcion;
-	private String requisitos;
-	private String validez;
-	public Certificacion(String id, String nombre, String descripcion, String requisitos, String validez) {
+	private int requisitos;
+	private int validez;
+	public Certificacion(String id, String nombre, String descripcion, int requisitos, int validez) {
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -22,10 +22,10 @@ public class Certificacion {
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public String getRequisitos() {
+	public int getRequisitos() {
 		return requisitos;
 	}
-	public String getValidez() {
+	public int getValidez() {
 		return validez;
 	}
 	
