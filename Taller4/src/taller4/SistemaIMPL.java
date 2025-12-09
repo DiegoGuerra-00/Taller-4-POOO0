@@ -137,6 +137,195 @@ public class SistemaIMPL implements Sistema{
 		return usuarioTIpo;
 	}
 
+	
+	
+	//------------------------------------------------------------------------------------------------------------------
+	
+	//MÉTODOS PARA LOS REQUERIMIENTOS DE CADA MENÚ
+	
+
+	@Override
+	public String crearCuentaDeEstudiante(String rut, String nombre, String carrera, int semestre, String correo,
+			String contraseña) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String crearCuentaDeCoordinador(String nombre, String contraseña, String rol, String infoAdicional) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String modificarCuentaDeEstudiante(String rut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String modificarCuentaDeCoordinador(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String eliminarCuentaDeEstudiante(String rut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String eliminarCuentaDeCoordinador(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String restablecerContraseña(String contraseñaNueva) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void modificarLineaDeCertificación(Certificacion certif) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void generarCertificadosDeEstudiantesAprobados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mostrarEstadísticasDeInscripcionesDeLinea() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void analisisDeAsignaturasCriticasDeLaLinea() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void consultarPerfilesCompletosDeEstudiantesEnLaLinea() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void revisarYValidarAvancesAcadémicos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public String visualizarInformaciónPersonalCompleta(String rut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String mostrarMallaCurricularConEstadoDeAsignatura(String rut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void calcularYMostrarPromedioGeneralYPorSemestre() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void visualizacionGraficaDeLaMallaCurricularPorSemestre() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void indicadoresVisualesDeEstadoDeAsignaturas() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void infoDetalladaDeCadaAsignatura() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void listarLineasDeCertificacionDisponibles() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mostrarRequisitosYDescripciónDeCadaLinea() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void procesoDeInscripciónConValidaciones() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void verificarPrerrequesitosAcadémicos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void dashboardPersonalConProgresoEnCertifiacionesInscritas() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void aplicaciónVisitorParaAccionesSegúnTipoCertificación() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mostrarAsignaturasPendientesParaCompletarCertificaciones() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
 
 

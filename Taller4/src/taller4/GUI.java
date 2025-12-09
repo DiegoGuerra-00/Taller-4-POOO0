@@ -10,11 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class GUI extends JFrame{
+	
 	private Sistema sistema;
 	static JFrame pantalla; // se usara para los metodos, se puede intepretar como si fuera un "private"
-	
-	
-
 	
 	JButton gestionUsuarios; //botones que contendran los botones principales del menu, al hacer click en algun boton principal se accedera a alguno de estos 
 	JButton gestionCertificacion;
@@ -28,9 +26,8 @@ public class GUI extends JFrame{
 	JLabel tituloAdmin;
 	JLabel tituloCoordinador;
 	JLabel tituloEstudiante;
-
 	
-	public GUI(Sistema sistema ) { // creacion de la gui
+	public GUI(Sistema sistema) { // creacion de la gui
 		pantalla = new JFrame();
 		
 	
@@ -82,10 +79,6 @@ public class GUI extends JFrame{
 		});
 		pantalla.setVisible(true);
 
-		
-
-
-
 //		
 //		mostrarGestionUsuario(botonAdmin);  // se despliega la info dentro del menu admin, en ella solo esta disponibe el boton gestion de usuarios
 //		mostrarMenuCoordinador(botonCoordinador); // se despliega el menu del coordinador
@@ -93,7 +86,6 @@ public class GUI extends JFrame{
 		
 	}
 
-	
 	private void limpiarPantallaTOTAL() { // se usa cuando se usa el volver, limpia toda la pantalla y la deja como al principio
 		pantalla.getContentPane().removeAll();
 		pantalla.repaint();
@@ -139,7 +131,6 @@ public class GUI extends JFrame{
 						modificarcuentasEstudianteCoordinador.setBounds(10,100,360,50);
 						eliminarCuentasEstudianteCoordinador.setBounds(10,170,360,50);
 						restablecerContraseñas.setBounds(10,240,360,50);
-						
 					
 						pantalla.add(crearCuentasEstudianteCoorinador);
 						pantalla.add(modificarcuentasEstudianteCoordinador); // esos botones se agegran a la pantalla
@@ -147,15 +138,10 @@ public class GUI extends JFrame{
 						pantalla.add(restablecerContraseñas);
 						volverMENUADMIN();
 
-						
 					}
 				});
 			}
 		});
-		
-		
-		
-		
 	}
 	
 	private void mostrarMenuCoordinador(JButton boton) {
@@ -166,7 +152,6 @@ public class GUI extends JFrame{
 
 				limpiarPantalla();
 				pantalla.setBounds(200,200,600,600);
-
 
 				tituloCoordinador = new JLabel("MENU COORDINADOR");
 				tituloCoordinador.setBounds(10,-60,200,200);
@@ -222,8 +207,7 @@ public class GUI extends JFrame{
 						pantalla.add(mostrarEstadisticasInscripciones);
 						pantalla.add(analisisAsignaturasCriticas);
 						volverMenuCoordinador(); // vuelve al menu coordinador
-
-					
+						
 					}
 				});//--------------------
 				
@@ -247,9 +231,6 @@ public class GUI extends JFrame{
 
 					}
 				});//--------------------
-				
-				
-				
 			}
 		});
 		
@@ -313,9 +294,12 @@ public class GUI extends JFrame{
 						pantalla.add(calcularMostrarPromedioGeneral);
 					
 						volverMenuEstudiante(); // vuelve al menu estudiante
-
 					}
-				});//---
+					
+					
+				});//----------------------------------------------------------------------------------------------------------------------------------------
+				
+				
 				
 				mallaCurricular.addActionListener(new ActionListener() {
 					
@@ -335,14 +319,11 @@ public class GUI extends JFrame{
 						infoDetalladaPorAsignatura.setBounds(10,210,360,50);
 						infoDetalladaPorAsignatura.setText("Información detallada al hacer clic en cada asignatura");
 						
-						
 						pantalla.add(visualizarGraficaSemestral);
 						pantalla.add(indicadorVisualAsignaturas);
 						pantalla.add(infoDetalladaPorAsignatura);
 
 						volverMenuEstudiante(); // vuelve al menu estudiante
-
-						
 					}
 				});//-----
 				
@@ -403,12 +384,6 @@ public class GUI extends JFrame{
 						volverMenuEstudiante(); // vuelve al menu estudiante
 					}
 				});
-				
-				
-				
-				
-
-				
 			}
 		});
 	}
@@ -477,6 +452,7 @@ public class GUI extends JFrame{
 		pantalla.add(volver);
 		
 	}
+	
 	private void limpiarMenuEstudiante() { //limpia el menu estudiante 
 		pantalla.getContentPane().removeAll();
 		pantalla.repaint();
@@ -490,6 +466,7 @@ public class GUI extends JFrame{
 		pantalla.repaint();
 		
 	}
+	
 	private void volverMenuEstudiante() { //vuelve a las opciones del menu coordinador
 		JButton volver = new JButton("Volver");
 		volver.setBounds(20,480,250,20);
