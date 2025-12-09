@@ -10,11 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class e {
+public class Main {
 	static JFrame frame;
 
     public static void main(String[] args) throws HeadlessException {
-
+    	
+    	System.out.println("aña");
+    	
         frame = new JFrame("Login");
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
