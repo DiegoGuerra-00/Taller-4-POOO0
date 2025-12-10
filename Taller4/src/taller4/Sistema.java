@@ -2,11 +2,17 @@ package taller4;
 
 public interface Sistema {
 	
+	
+// VALIDACIONES DE USUARIO
 	public String validarUsuario(String contraseña);
+	public String validarEstudiante(String rut);
+	public String validarCoordinador(String nombre);
 	public void mostrar();
 	
 	public String devolverTipoUsuario(String contraseña);
 	
+	
+// RELLENO DE LISTAS	
 	public void rellenarlistacursos(String nrc, String nombreCurso, int semestre, int creditos, String area, String nrcPrerrequisito);
 	public void rellenarlistaAsignaturaCertificacion(String id, String nrc);
 	public void rellenarlistaCertificacion(String id, String nombre, String descripcion, int requisitos, int validez);
@@ -19,8 +25,8 @@ public interface Sistema {
 //	MENÚ ADMIN
 	
 	// Gestión de Usuarios
-	String crearCuentaDeEstudiante(String rut,String nombre, String carrera, int semestre, String correo, String contraseña);
-	String crearCuentaDeCoordinador(String nombre,String contraseña,String rol, String infoAdicional);
+	void crearCuentaDeEstudiante(String rut,String nombre, String carrera, int semestre, String correo, String contraseña);
+	void crearCuentaDeCoordinador(String nombre,String contraseña,String rol, String infoAdicional);
 	String modificarCuentaDeEstudiante(String rut);
 	String modificarCuentaDeCoordinador(String nombre);
 	String eliminarCuentaDeEstudiante(String rut);
@@ -66,5 +72,7 @@ public interface Sistema {
 	void aplicaciónVisitorParaAccionesSegúnTipoCertificación();
 	void mostrarAsignaturasPendientesParaCompletarCertificaciones();
 	
+// CAMBIAR DATOS
+	void cambiarEstudiante(String rut, StrategyCambiodatos datos, String val);
 
 }

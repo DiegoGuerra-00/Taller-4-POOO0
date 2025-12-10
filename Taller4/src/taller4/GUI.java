@@ -28,10 +28,11 @@ public class GUI extends JFrame{
 	JLabel tituloEstudiante;
 	
 	public GUI(Sistema sistema) { // creacion de la gui
+		this.sistema = sistema;
 		pantalla = new JFrame();
 		
 	
-		pantalla.setBounds(100,200,350,200);
+		pantalla.setBounds(600,200,350,200);
 		pantalla.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pantalla.setTitle("ACADEMI CORE");
 		pantalla.setLayout(null);
@@ -100,7 +101,7 @@ public class GUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) { 
 				limpiarPantalla();
-				pantalla.setBounds(200,200,600,600);
+				pantalla.setBounds(600,200,600,600);
 				
 				
 				tituloAdmin = new JLabel("MENU ADMIN");
@@ -120,10 +121,13 @@ public class GUI extends JFrame{
 						
 						JButton crearCuentasEstudianteCoorinador =  new JButton();
 						crearCuentasEstudianteCoorinador.setText("Crear cuentas de estudiante o coordinador");
+						
 						JButton modificarcuentasEstudianteCoordinador =  new JButton();
 						modificarcuentasEstudianteCoordinador.setText("Modificar cuentas de estudiante o coordinador");
+						
 						JButton eliminarCuentasEstudianteCoordinador =  new JButton();
 						eliminarCuentasEstudianteCoordinador.setText("Eliminar cuentas de estudiante o coordinador");
+						
 						JButton restablecerContraseñas =  new JButton();
 						restablecerContraseñas.setText("Restablecer contraseñas");
 
@@ -137,6 +141,360 @@ public class GUI extends JFrame{
 						pantalla.add(eliminarCuentasEstudianteCoordinador);
 						pantalla.add(restablecerContraseñas);
 						volverMENUADMIN();
+						
+						crearCuentasEstudianteCoorinador.addActionListener(new ActionListener() { // para la creacion de cuentas de estudiantes o coordinador
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								limpiarPantalla(); // boton que limpia la pantalla 
+								
+								pantalla.setBounds(600,200,350,260);
+								JLabel seleccionar = new  JLabel("Seleccione la cuenta a crear");
+								seleccionar.setBounds(90,20,200,30);
+								
+								
+								JButton estudiante = new JButton("Estudiante");
+								estudiante.setBounds(30,70,115,30);
+								
+								JButton coordinador = new JButton("Coordinador");
+								coordinador.setBounds(200,70,110,30);
+								
+								//Boton que hace volver a las opciones anteriores 
+								botonVolverGestionUsuarios(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+								pantalla.add(seleccionar);
+								pantalla.add(estudiante);
+								pantalla.add(coordinador);
+								
+								estudiante.addActionListener(new ActionListener() {// boton si se crea un estudiante nuevo
+								
+									@Override
+									public void actionPerformed(ActionEvent e) {
+									limpiarPantalla(); 
+									pantalla.setBounds(600,200,400,360);
+
+									JLabel  rutestudiante = new JLabel("Rut del estudiante:");
+									rutestudiante.setBounds(20,10,200,30);
+									
+									JTextField rut = new JTextField(); // input de rut
+									rut.setBounds(130,10,105,30);
+									pantalla.add(rut);
+									
+									JLabel nombreEstudiante = new JLabel("Nombre del estudiante:");
+									nombreEstudiante.setBounds(20,50,200,30);
+									
+									JTextField nombre = new JTextField();//input para el nombre
+									nombre.setBounds(160,50,120,30);
+									pantalla.add(nombre);
+						
+									
+									JLabel carreraEstudiante = new JLabel("Carerra del estudiante:");
+									carreraEstudiante.setBounds(20,90,200,30);
+									
+									JTextField carrera = new JTextField(); //input para la carrera
+									carrera.setBounds(155,90,120,30);
+									pantalla.add(carrera);
+
+									JLabel semestreEstudiante = new JLabel("Semestre actual del estudiante:");
+									semestreEstudiante.setBounds(20,130,200,30);
+									
+									JTextField semestre = new JTextField(); //input para el semestre
+									semestre.setBounds(200,130,120,30);
+									pantalla.add(semestre);
+
+									JLabel correoEstudiante = new JLabel("Correo del estudiante:");
+									correoEstudiante.setBounds(20,170,200,30);
+									
+									JTextField correo = new JTextField(); //input para el correo
+									correo.setBounds(155,170,120,30);
+									pantalla.add(correo);
+
+									JLabel contraseñaEstudiante = new JLabel("Contraseña del estudiante:");
+									contraseñaEstudiante.setBounds(20,210,200,30);
+									
+									JTextField contraseña = new JTextField(); //input para la contraseña
+									contraseña.setBounds(180,210,120,30);
+									pantalla.add(contraseña);
+
+									pantalla.add(rutestudiante);
+									pantalla.add(nombreEstudiante);
+
+									pantalla.add(carreraEstudiante);
+									pantalla.add(semestreEstudiante);
+									pantalla.add(correoEstudiante);
+									pantalla.add(contraseñaEstudiante);
+									
+									JButton botonListo = new JButton("Listo");
+									botonListo.setBounds(230,250,120,30);
+									pantalla.add(botonListo);
+									
+									JButton volvera = new JButton("Volver");
+									volvera.setBounds(40,250,120,30);
+									pantalla.add(volvera);
+
+									botonListo.addActionListener(new ActionListener() {
+				
+										@Override
+										public void actionPerformed(ActionEvent e) {
+											//prueba de error para validar espacios de los inputs
+											if(nombre.getText().isEmpty() || rut.getText().isEmpty()|| 
+											carrera.getText().isEmpty() ||semestre.getText().isEmpty() 
+											||correo.getText().isEmpty() ||
+											contraseña.getText().isEmpty()) {
+												
+												
+												JOptionPane.showMessageDialog(pantalla,"Faltan datos");
+												return;
+											}else {
+												
+												int numeroSemestre = Integer.valueOf(semestre.getText().trim());
+												sistema.crearCuentaDeEstudiante(rut.getText(), nombre.getText(), carrera.getText(), numeroSemestre, correo.getText(), contraseña.getText());
+												
+												
+												JOptionPane.showMessageDialog(pantalla,"Usuario agregado");
+												
+												
+												
+												// se limpian los espacios para los inputs
+												rut.setText(""); 
+												nombre.setText("");
+												carrera.setText("");
+												semestre.setText("");
+												contraseña.setText("");
+												correo.setText("");
+												
+												
+
+											}
+											
+										}
+									});
+									volvera.addActionListener(new ActionListener() {
+										
+										@Override
+										public void actionPerformed(ActionEvent e) {
+											pantalla.setBounds(600,200,350,260);
+
+											pantalla.getContentPane().removeAll();
+											pantalla.repaint();
+											pantalla.revalidate();
+
+											pantalla.add(seleccionar);
+											pantalla.add(estudiante);
+											pantalla.add(coordinador);
+											botonVolverGestionUsuarios(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+											
+										}
+									});//---
+									
+									
+
+									}
+									
+									
+									
+								});//fin boton estudiante
+								coordinador.addActionListener(new ActionListener() {// boton creacion coordinador nuevo
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										limpiarPantalla(); 
+										pantalla.setBounds(600,200,400,360);
+
+										JLabel  nombreCoordinador = new JLabel("Nombre del Coordinador:");
+										nombreCoordinador.setBounds(20,10,200,30);
+										
+										JTextField nombre = new JTextField(); // input de rut
+										nombre.setBounds(180,10,105,30);
+										pantalla.add(nombre);
+										
+										JLabel contraseñaCoord = new JLabel("Contraseña del Coordinador:");
+										contraseñaCoord.setBounds(20,50,200,30);
+										
+										JTextField contraseña = new JTextField();//input para el nombre
+										contraseña.setBounds(190,50,120,30);
+										pantalla.add(contraseña);
+							
+										
+										JLabel infoAdicional = new JLabel("Info adicional:");
+										infoAdicional.setBounds(20,90,200,30);
+										
+										JTextField info = new JTextField(); //input para la carrera
+										info.setBounds(100,90,120,30);
+										pantalla.add(info);
+										
+										pantalla.add(nombreCoordinador);
+										pantalla.add(contraseñaCoord);
+										pantalla.add(infoAdicional);
+
+										JButton botonListo = new JButton("Listo");
+										botonListo.setBounds(230,250,120,30);
+										pantalla.add(botonListo);
+										
+										JButton volvera = new JButton("Volver");
+										volvera.setBounds(40,250,120,30);
+										pantalla.add(volvera);
+
+										
+										botonListo.addActionListener(new ActionListener() {
+											
+											@Override
+											public void actionPerformed(ActionEvent e) {
+												//prueba de error para validar espacios de los inputs
+												if(nombre.getText().isEmpty() || contraseña.getText().isEmpty()|| 
+														info.getText().isEmpty()) {
+													
+													
+													JOptionPane.showMessageDialog(pantalla,"Faltan datos");
+													return;		
+												}else {
+													sistema.crearCuentaDeCoordinador(nombre.getText(), contraseña.getText(), "Coordinador", info.getText());
+													
+													JOptionPane.showMessageDialog(pantalla,"Usuario agregado");
+																										
+													// se limpian los espacios para los inputs
+													nombre.setText("");
+													contraseña.setText("");
+													info.setText("");
+													
+												}
+											}
+										});//fin boton listo
+									volvera.addActionListener(new ActionListener() {
+										
+										@Override
+										public void actionPerformed(ActionEvent e) {
+											pantalla.setBounds(600,200,350,260);
+
+											pantalla.getContentPane().removeAll();
+											pantalla.repaint();
+											pantalla.revalidate();
+
+											pantalla.add(seleccionar);
+											pantalla.add(estudiante);
+											pantalla.add(coordinador);
+											botonVolverGestionUsuarios(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+											
+										}
+									});//fin boton volvera
+									
+									}
+								});//fin boton coordinador
+								
+							}
+						}); // fin accion boton crearCuentasEstudianteCoorinador
+						modificarcuentasEstudianteCoordinador.addActionListener(new ActionListener() {//inicio boton modificar cuentas
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								limpiarPantalla(); // boton que limpia la pantalla 
+								
+								pantalla.setBounds(600,200,350,260);
+								JLabel seleccionar = new  JLabel("Seleccione la cuenta a modificar");
+								seleccionar.setBounds(90,20,200,30);
+								
+								
+								JButton estudiante = new JButton("Estudiante");
+								estudiante.setBounds(30,70,115,30);
+								
+								JButton coordinador = new JButton("Coordinador");
+								coordinador.setBounds(200,70,110,30);
+								
+								//Boton que hace volver a las opciones anteriores 
+								botonVolverGestionUsuarios(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+								pantalla.add(seleccionar);
+								pantalla.add(estudiante);
+								pantalla.add(coordinador);
+								
+								estudiante.addActionListener(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										limpiarPantalla();
+										JLabel rut = new JLabel("Ingrese rut del estudiante:");
+										rut.setBounds(10,20,200,30);
+										pantalla.add(rut);
+										
+										JTextField rutEstudiante = new JTextField();
+										rutEstudiante.setBounds(170,20,100,30);
+										pantalla.add(rutEstudiante);
+										
+										JButton continuar = new JButton("Continuar");
+										continuar.setBounds(170,50,100,30);
+										pantalla.add(continuar);
+
+										
+										continuar.addActionListener(new ActionListener() {
+											
+											@Override
+											public void actionPerformed(ActionEvent e) {
+												String rut = rutEstudiante.getText();
+												String resultado = sistema.validarEstudiante(rut);
+												if(resultado.equalsIgnoreCase("Usuario no encontrado")) {
+													JOptionPane.showMessageDialog(pantalla, "Estudiante no encontrado");
+												}else {
+													limpiarPantalla();
+													JLabel seleccionar = new JLabel("Seleccione el dato a cambiar");
+													seleccionar.setBounds(90,10,200,30);
+													pantalla.add(seleccionar);
+
+													
+													JButton botonrut = new JButton("Rut");
+													JButton botonNombre  = new JButton("Nombre");
+													JButton botoncarrera = new JButton("Carrera");
+													JButton botonsemestre = new JButton("Semestre");
+													JButton botoncorreo = new JButton("Correo");
+													JButton botonContraseña = new JButton("Contraseña");
+													
+													//lado izquierdo
+													botonrut.setBounds(30,60,100,30);
+													botonNombre.setBounds(30,110,100,30);
+													botoncarrera.setBounds(30,160,100,30);
+
+													pantalla.add(botonrut);
+													pantalla.add(botonNombre);
+													pantalla.add(botoncarrera);
+													
+													//lado derecho
+													botonsemestre.setBounds(200,60,100,30);
+													botoncorreo.setBounds(200,110,100,30);
+													botonContraseña.setBounds(200,160,100,30);
+													
+													pantalla.add(botonsemestre);
+													pantalla.add(botoncorreo);
+													pantalla.add(botonContraseña);
+													
+													//accion de botones texto, estrategia,rut original, Sistema, boton
+													
+													
+													cambiarDatosEstudiantes(botonrut, new CambiarRut(), "Rut",rut, botonrut, botonNombre, botoncarrera, botonsemestre, botoncorreo, botonContraseña);
+													cambiarDatosEstudiantes(botonNombre, new CambiarNombre(), "Nombre",rut, botonrut, botonNombre, botoncarrera, botonsemestre, botoncorreo, botonContraseña);
+													cambiarDatosEstudiantes(botoncarrera, new CambiarCarrera(), "Carrera",rut, botonrut, botonNombre, botoncarrera, botonsemestre, botoncorreo, botonContraseña);
+													cambiarDatosEstudiantes(botonsemestre, new Cambiarsemestre(), "Semestre",rut, botonrut, botonNombre, botoncarrera, botonsemestre, botoncorreo, botonContraseña);
+													cambiarDatosEstudiantes(botoncorreo, new CambiarCorreo(), "Correo",rut, botonrut, botonNombre, botoncarrera, botonsemestre, botoncorreo, botonContraseña);
+													cambiarDatosEstudiantes(botonContraseña, new Cambiarcontraseña(), "Contraseña",rut, botonrut, botonNombre, botoncarrera, botonsemestre, botoncorreo, botonContraseña);
+											
+
+													
+
+												}//fin del else
+												
+
+												
+											}
+										});//fin boton continuar
+										
+										
+									}
+								});//fin boton estudiante
+																
+							}
+						});// fin boton modificar cuentas 
+						;
+						
+						
+						
+						
+						
 
 					}
 				});
@@ -151,7 +509,7 @@ public class GUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 
 				limpiarPantalla();
-				pantalla.setBounds(200,200,600,600);
+				pantalla.setBounds(600,200,600,600);
 
 				tituloCoordinador = new JLabel("MENU COORDINADOR");
 				tituloCoordinador.setBounds(10,-60,200,200);
@@ -242,7 +600,7 @@ public class GUI extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pantalla.setBounds(200,200,600,600);
+				pantalla.setBounds(600,200,600,600);
 
 				limpiarPantalla();
 				tituloEstudiante = new JLabel("MENU ESTUDIANTE");
@@ -475,6 +833,106 @@ public class GUI extends JFrame{
 		});
 		pantalla.add(volver);
 		
+	}
+	
+	//Boton creado para que se vuelva a las opciones que hay en el menu de administrador
+	private void botonVolverGestionUsuarios(JButton crearCuentas,JButton modifcarCuentas, JButton EliminarCuentas, JButton restablecer) {
+		JButton volverOpciones= new JButton("Volver");
+		volverOpciones.setBounds(68,130,200,30);
+		volverOpciones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pantalla.getContentPane().removeAll();
+				pantalla.repaint();
+				pantalla.revalidate();
+				
+				pantalla.add(crearCuentas);
+				pantalla.add(modifcarCuentas); // esos botones se agegran a la pantalla
+				pantalla.add(EliminarCuentas);
+				pantalla.add(restablecer);
+				volverMENUADMIN();
+				pantalla.repaint();
+				pantalla.setBounds(600,200,600,600);
+
+			}
+		});
+		pantalla.add(volverOpciones);
+
+	}
+	
+	// metodo para cambiar datos de un estudiante, dependiendo del tipo de dato que se quiera cambiar
+	private void cambiarDatosEstudiantes(JButton boton, StrategyCambiodatos estrategia, String titulo, String rut,JButton botonrut,
+			JButton botonnombre,JButton botoncarrera,JButton botonsemestre,JButton botoncorreo,JButton botoncontraseña) {
+		boton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				limpiarPantalla();
+				JLabel texto = new JLabel("Ingrese nuevo "+ titulo +":");
+				texto.setBounds(10,10,200,30);
+				pantalla.add(texto);
+				
+				JTextField rutNuevo = new JTextField();
+				rutNuevo.setBounds(170,10,100,30);
+				pantalla.add(rutNuevo);
+				
+				
+//				sistema.cambiarEstudiante(rut, new CambiarRut(), resultado);
+				
+				JButton cambiar = new JButton("Cambiar");
+				cambiar.setBounds(150,50,100,30);
+				pantalla.add(cambiar);
+				
+				JButton volvera = new JButton("Volver");
+				volvera.setBounds(40,130,120,30);
+				pantalla.add(volvera);
+				
+				cambiar.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						String valor = rutNuevo.getText();
+
+						if(valor.equals("")) {
+							JOptionPane.showMessageDialog(pantalla, "Faltan datos");
+						}else {
+							sistema.cambiarEstudiante(rut, estrategia, valor);
+							JOptionPane.showMessageDialog(pantalla, titulo+" actualizado!");
+							
+
+						}
+						
+					}
+				});
+				volvera.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						pantalla.setBounds(600,200,350,260);
+
+						pantalla.getContentPane().removeAll();
+						pantalla.repaint();
+						pantalla.revalidate();
+						
+						pantalla.add(botonrut);
+						pantalla.add(botonnombre);
+						pantalla.add(botoncarrera);
+						
+						
+						pantalla.add(botonsemestre);
+						pantalla.add(botoncorreo);
+						pantalla.add(botoncontraseña);
+						JLabel seleccionar = new  JLabel("Seleccione la cuenta a modificar");
+						seleccionar.setBounds(90,20,200,30);
+						pantalla.add(seleccionar);
+					}
+				});//fin boton volvera
+						
+			
+				
+			}
+		});
 	}
 	
 	

@@ -39,7 +39,7 @@ public class SistemaIMPL implements Sistema{
 		String mensaje = "Usuario no encontrado";
 		
 		for(String contraseñas : listaContraseñas) {
-			if(contraseñas.equalsIgnoreCase(contraseña)) {//si no contiene una contraseña
+			if(contraseñas.equals(contraseña)) {//si no contiene una contraseña
 			mensaje = "Encontrado";
 			}
 			
@@ -111,7 +111,7 @@ public class SistemaIMPL implements Sistema{
 	
 			
 		for(Usuario usuario : listaUsuarios) {
-			if(usuario.getContraseña().equalsIgnoreCase(contraseña)) {
+			if(usuario.getContraseña().equals(contraseña)) {
 				
 				if(usuario.getRol().equalsIgnoreCase("Coordinador")) {
 					usuarioTIpo = "Coordinador";
@@ -123,7 +123,7 @@ public class SistemaIMPL implements Sistema{
 			
 		}//---
 		for(Estudiante estudiante : listaEstudiantes) {
-			if(estudiante.getContraseña().equalsIgnoreCase(contraseña)) {
+			if(estudiante.getContraseña().equals(contraseña)) {
 				usuarioTIpo = "Estudiante";
 			}
 		}//----
@@ -145,17 +145,16 @@ public class SistemaIMPL implements Sistema{
 	
 
 	@Override
-	public String crearCuentaDeEstudiante(String rut, String nombre, String carrera, int semestre, String correo,
+	public void crearCuentaDeEstudiante(String rut, String nombre, String carrera, int semestre, String correo,
 			String contraseña) {
-		// TODO Auto-generated method stub
-		return null;
+		Estudiante estudiante = new Estudiante(rut, nombre, carrera, semestre, correo, contraseña);
+		listaEstudiantes.add(estudiante);
 	}
 
-
 	@Override
-	public String crearCuentaDeCoordinador(String nombre, String contraseña, String rol, String infoAdicional) {
-		// TODO Auto-generated method stub
-		return null;
+	public void crearCuentaDeCoordinador(String nombre, String contraseña, String rol, String infoAdicional) {
+		Usuario usuario = new Usuario(nombre, contraseña, rol, infoAdicional);
+		listaUsuarios.add(usuario);
 	}
 
 
@@ -326,6 +325,56 @@ public class SistemaIMPL implements Sistema{
 		
 	}
 
+
+	@Override
+	public String validarEstudiante(String rut) { // verifica si existe el estudiante
+		String mensaje = "Usuario no encontrado";
+		
+		for(Estudiante estudiante : listaEstudiantes) {
+			String rutEstuddiante = estudiante.getRut();
+			if(rutEstuddiante.equals(rut)) {//si no contiene una contraseña
+			mensaje = "Encontrado";
+			}
+			
+		}
+		
+		return mensaje;
+	}
+
+
+	@Override
+	public String validarCoordinador(String nombre) {//verifica si existe el coordinador
+		String mensaje = "Usuario no encontrado";
+		
+		for(Usuario usuario : listaUsuarios) {
+			if(usuario.getRol().equals("Coordinador")) {
+				if(usuario.getRol().equals(nombre)) {//si no contiene una contraseña
+					mensaje = "Encontrado";
+					}
+					
+			}
+			
+			
+		}
+		
+		return mensaje;
+		
+		
+		
+	}
+
+
+	@Override
+	public void cambiarEstudiante(String rut, StrategyCambiodatos datos, String val) {
+		for(Estudiante estudiante : listaEstudiantes) {
+			if(estudiante.getRut().equalsIgnoreCase(rut)) {
+				datos.cambiar(estudiante, val);}
+				return;
+			}
+		}
+		
 }
+
+
 
 

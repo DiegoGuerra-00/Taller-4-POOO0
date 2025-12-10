@@ -16,7 +16,7 @@ public class App {
 		abrirNotas(sistema);
 		abrirRegistros(sistema);
 		abrirUsuarios(sistema);
-		
+		 
 		GUI gui = new GUI(sistema);
 		
 //		sistema.mostrar();
@@ -130,6 +130,20 @@ public class App {
 			}
 			sistema.rellenarlistaUsuario(nombreUsuario, contraseña, rol, infoAdicional);
 			
-		}		
+		}
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }
