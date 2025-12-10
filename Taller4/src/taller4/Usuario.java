@@ -20,6 +20,18 @@ public class Usuario {
 	public String getRol() {
 		return rol;
 	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+	public void setInformacion(String informacion) {
+		this.informacion = informacion;
+	}
 	public String getInformacion() {
 		return informacion;
 	}

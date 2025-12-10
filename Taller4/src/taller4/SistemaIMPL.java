@@ -348,18 +348,12 @@ public class SistemaIMPL implements Sistema{
 		
 		for(Usuario usuario : listaUsuarios) {
 			if(usuario.getRol().equals("Coordinador")) {
-				if(usuario.getRol().equals(nombre)) {//si no contiene una contraseña
+				if(usuario.getNombre().equals(nombre)) {//si no contiene una contraseña
 					mensaje = "Encontrado";
 					}
-					
-			}
-			
-			
+			}	
 		}
-		
 		return mensaje;
-		
-		
 		
 	}
 
@@ -368,10 +362,24 @@ public class SistemaIMPL implements Sistema{
 	public void cambiarEstudiante(String rut, StrategyCambiodatos datos, String val) {
 		for(Estudiante estudiante : listaEstudiantes) {
 			if(estudiante.getRut().equalsIgnoreCase(rut)) {
-				datos.cambiar(estudiante, val);}
+				datos.cambiar(estudiante, val);
+				return;
+				}
+			}
+		}
+
+
+	@Override
+	public void cambiarCoordinador(String nombre, StrategyCambiarDatosCoord datos, String valor) {
+		for(Usuario usuario : listaUsuarios) {
+			if(usuario.getNombre().equalsIgnoreCase(nombre)) {
+				datos.cambiardatosCord(usuario, valor);
 				return;
 			}
 		}
+		
+		
+	}
 		
 }
 
