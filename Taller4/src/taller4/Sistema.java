@@ -31,7 +31,12 @@ public interface Sistema {
 	String modificarCuentaDeCoordinador(String nombre);
 	void eliminarCuentaDeEstudiante(String rut);
 	void eliminarCuentaDeCoordinador(String nombre);
-	String restablecerContraseña(String contraseñaNueva);
+	String restablecerContraseña(String contraseñaNueva,String contraseñavieja);
+//	String existeEstudianteoCoordinador(String valor);
+//	boolean existeCoordinador(String nombre);
+//	String devolverEstudiante(String rut);
+//	String contraseñaEstudiante(String rut);
+	String contraseñaAdmin(String contraseña);
 	
 
 // MENÚ COORDINADOR

@@ -69,7 +69,7 @@ public class GUI extends JFrame{
 						break;
 
 					case "Admin":
-						mostrarGestionUsuario(sesion);
+						mostrarGestionUsuario(sesion, contra);
 						break;
 					case"Estudiante":
 						mostrarMenuEstudiante(sesion);
@@ -97,7 +97,7 @@ public class GUI extends JFrame{
 		pantalla.repaint();
 		
 	}
-	private void mostrarGestionUsuario(JButton boton) { // muestra la opcion de gestion usuario del menu admin
+	private void mostrarGestionUsuario(JButton boton,String contra) { // muestra la opcion de gestion usuario del menu admin
 		boton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -131,7 +131,7 @@ public class GUI extends JFrame{
 						eliminarCuentasEstudianteCoordinador.setText("Eliminar cuentas de estudiante o coordinador");
 						
 						JButton restablecerContraseñas =  new JButton();
-						restablecerContraseñas.setText("Restablecer contraseñas");
+						restablecerContraseñas.setText("Restablecer contraseña");
 
 						crearCuentasEstudianteCoorinador.setBounds(10,30,360,50);
 						modificarcuentasEstudianteCoordinador.setBounds(10,100,360,50);
@@ -683,7 +683,41 @@ public class GUI extends JFrame{
 							
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								// TODO Auto-generated method stub
+								limpiarPantalla(); // boton que limpia la pantalla 
+								
+								pantalla.setBounds(600,200,400,300);
+								JLabel seleccionar = new  JLabel("Su contraseña actual es "+sistema.contraseñaAdmin(contra));
+								seleccionar.setBounds(20,20,800,40);
+								
+								
+								JLabel nuevo = new JLabel("Ingresar nueva contraseña:");
+								nuevo.setBounds(20,55,300,30);
+								JTextField input = new JTextField();
+								input.setBounds(190,55,150,30);
+								
+								pantalla.add(seleccionar);
+								pantalla.add(nuevo);
+								pantalla.add(input);
+								
+								botonVolverGestionUsuarios(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+								JButton restablecer = new JButton("Restablecer");
+								restablecer.setBounds(205,110,150,30);
+								pantalla.add(restablecer);
+								
+								restablecer.addActionListener(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										String valor = input.getText();
+										JOptionPane.showMessageDialog(pantalla, sistema.restablecerContraseña(valor, contra));
+										JLabel seleccionar = new  JLabel("Su contraseña actual es "+sistema.contraseñaAdmin(valor));
+										seleccionar.setBounds(20,20,800,40);
+										pantalla.add(seleccionar);
+											
+										
+									}
+								});
+								
 								
 							}
 						});//fin boton restablecer contraseñas

@@ -201,9 +201,14 @@ public class SistemaIMPL implements Sistema{
 
 
 	@Override
-	public String restablecerContraseña(String contraseñaNueva) {
-		// TODO Auto-generated method stub
-		return null;
+	public String restablecerContraseña(String contraseñaNueva,String contraseñaVieja) {
+		String mensaje = "Contraseña restablecida!";
+		for(Usuario usuario : listaUsuarios) {
+			if(usuario.getContraseña().equalsIgnoreCase(contraseñaVieja)) {
+				usuario.setContraseña(contraseñaNueva);
+			}
+		}
+		return mensaje;
 	}
 
 
@@ -394,6 +399,74 @@ public class SistemaIMPL implements Sistema{
 		
 		
 	}
+
+
+//	@Override
+//	public String existeEstudianteoCoordinador(String valor) {
+//		
+//		for(Estudiante estudiante : listaEstudiantes) {
+//			if(estudiante.getRut().equalsIgnoreCase(valor)) {
+//				
+//				return "Estudiante";
+//			}
+//		}
+//		for(Usuario usuario : listaUsuarios ) {
+//			if(usuario.getNombre().equalsIgnoreCase(valor)) {
+//				return "Coordinador";
+//			}
+//		}
+//		return "";
+//	}
+//
+//
+//	@Override
+//	public boolean existeCoordinador(String nombre) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//
+//	@Override
+//	public String devolverEstudiante(String rut) {
+//		String nombre = "";
+//		for(Estudiante estudiante : listaEstudiantes) {
+//			if(estudiante.getRut().equalsIgnoreCase(rut)) {
+//				nombre = estudiante.getNombre();
+//			}
+//		}
+//		
+//		return nombre;
+//	}
+//
+//
+//	
+//
+//
+//	@Override
+//	public String contraseñaEstudiante(String rut) {
+//		String contraseña = "";
+//		for(Estudiante estudiante : listaEstudiantes) {
+//			if(estudiante.getRut().equalsIgnoreCase(rut)) {
+//				contraseña = estudiante.getContraseña();
+//			}
+//		}	
+//		return contraseña;
+//	}
+//
+//
+	@Override
+	public String contraseñaAdmin(String contra) {
+		String contraseña = "";
+		for(Usuario usuario : listaUsuarios) {
+			if(usuario.getContraseña().equalsIgnoreCase(contra)) {
+				contraseña = usuario.getContraseña();
+			}
+		}		
+		return contraseña;
+	}
+
+
+	
 		
 }
 
