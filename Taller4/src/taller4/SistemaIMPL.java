@@ -173,16 +173,30 @@ public class SistemaIMPL implements Sistema{
 
 
 	@Override
-	public String eliminarCuentaDeEstudiante(String rut) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public void eliminarCuentaDeEstudiante(String rut) {
+		Estudiante estudianteEliminado = null;
+		for(Estudiante estudiante : listaEstudiantes) {
+			if(estudiante.getRut().equalsIgnoreCase(rut)) {
+				estudianteEliminado = estudiante;
+				break;
+			}
+		}
+		listaEstudiantes.remove(estudianteEliminado);
+
 	}
 
 
 	@Override
-	public String eliminarCuentaDeCoordinador(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
+	public void eliminarCuentaDeCoordinador(String nombre) {
+		Usuario usuarioEliminado = null;
+		for(Usuario usuario : listaUsuarios) {
+			if(usuario.getNombre().equalsIgnoreCase(nombre)) {
+				usuarioEliminado = usuario;
+			}
+		}
+		listaUsuarios.remove(usuarioEliminado);
+		
 	}
 
 

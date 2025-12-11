@@ -29,8 +29,8 @@ public interface Sistema {
 	void crearCuentaDeCoordinador(String nombre,String contraseña,String rol, String infoAdicional);
 	String modificarCuentaDeEstudiante(String rut);
 	String modificarCuentaDeCoordinador(String nombre);
-	String eliminarCuentaDeEstudiante(String rut);
-	String eliminarCuentaDeCoordinador(String nombre);
+	void eliminarCuentaDeEstudiante(String rut);
+	void eliminarCuentaDeCoordinador(String nombre);
 	String restablecerContraseña(String contraseñaNueva);
 	
 

@@ -265,7 +265,6 @@ public class GUI extends JFrame{
 												JOptionPane.showMessageDialog(pantalla,"Usuario agregado");
 												
 												
-												
 												// se limpian los espacios para los inputs
 												rut.setText(""); 
 												nombre.setText("");
@@ -273,11 +272,7 @@ public class GUI extends JFrame{
 												semestre.setText("");
 												contraseña.setText("");
 												correo.setText("");
-												
-												
-
-											
-											
+																				
 										}
 									});//fin boton listo
 									volvera.addActionListener(new ActionListener() {
@@ -301,7 +296,6 @@ public class GUI extends JFrame{
 									
 
 									}
-									
 									
 									
 								});//fin boton estudiante
@@ -580,7 +574,121 @@ public class GUI extends JFrame{
 																
 							}
 						});// fin boton modificar cuentas 
-						;
+						eliminarCuentasEstudianteCoordinador.addActionListener(new ActionListener() {//inicio boton eliminar cuentas
+							
+							@Override
+							
+							public void actionPerformed(ActionEvent e) {
+								
+								limpiarPantalla(); // boton que limpia la pantalla 
+								
+								pantalla.setBounds(600,200,350,300);
+								JLabel seleccionar = new  JLabel("Seleccione el tipo de cuenta a eliminar");
+								seleccionar.setBounds(70,20,300,30);
+								
+								
+								JButton estudiante = new JButton("Estudiante");
+								estudiante.setBounds(30,70,115,30);
+								
+								JButton coordinador = new JButton("Coordinador");
+								coordinador.setBounds(200,70,110,30);
+								
+								pantalla.add(estudiante);
+								pantalla.add(coordinador);
+								pantalla.add(seleccionar);
+								botonVolverGestionUsuarios(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+
+								estudiante.addActionListener(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										
+										limpiarPantalla();
+										JLabel rut = new JLabel("Ingrese rut del estudiante:");
+										rut.setBounds(10,20,200,30);
+										pantalla.add(rut);
+										
+										JTextField rutEstudiante = new JTextField();
+										rutEstudiante.setBounds(170,20,100,30);
+										pantalla.add(rutEstudiante);
+										
+										JButton eliminar = new JButton("Eliminar");
+										eliminar.setBounds(170,50,100,30);
+										pantalla.add(eliminar);
+										botonVolverCambioEstudiante(seleccionar,estudiante,coordinador,crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+
+										eliminar.addActionListener(new ActionListener() {
+	
+											@Override
+											public void actionPerformed(ActionEvent e) {
+												String rut_ = rutEstudiante.getText();
+												String resultado = sistema.validarEstudiante(rut_);
+												if(resultado.equalsIgnoreCase("Usuario no encontrado")) {// validar que el usuario exista
+													JOptionPane.showMessageDialog(pantalla, "Estudiante no encontrado");
+													rutEstudiante.setText("");
+
+												}else {
+													JOptionPane.showMessageDialog(pantalla, "Cuenta eliminada");
+													
+													sistema.eliminarCuentaDeEstudiante(rut_); // estudiante eliminado del sistema
+													rutEstudiante.setText("");
+													botonVolverCuentasModificar(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas,seleccionar,estudiante,coordinador);
+
+												}
+											}
+										});
+									}
+								});//fin boton borrar estudiante
+								coordinador.addActionListener(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										limpiarPantalla();
+
+										JLabel nombre = new JLabel("Ingrese nombre del Coordinador:");
+										nombre.setBounds(10,20,200,30);
+										pantalla.add(nombre);
+										
+										JTextField nombreCorrdinador = new JTextField();
+										nombreCorrdinador.setBounds(205,20,100,30);
+										pantalla.add(nombreCorrdinador);
+										
+										JButton eliminar = new JButton("Eliminar");
+										eliminar.setBounds(205,60,100,30);
+										pantalla.add(eliminar);				
+										botonVolverCambioEstudiante(seleccionar,estudiante,coordinador,crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas);
+
+										eliminar.addActionListener(new ActionListener() {
+											
+											@Override
+											public void actionPerformed(ActionEvent e) {
+												String nombre = nombreCorrdinador.getText();
+												String resultado = sistema.validarCoordinador(nombre);
+												if(resultado.equalsIgnoreCase("Usuario no encontrado")) {// validar que el usuario exista
+													JOptionPane.showMessageDialog(pantalla, "Coordinador no encontrado");
+												}else {
+													JOptionPane.showMessageDialog(pantalla, "Cuenta eliminada");
+													nombreCorrdinador.setText("");
+													sistema.eliminarCuentaDeCoordinador(nombre);
+													botonVolverCuentasModificar(crearCuentasEstudianteCoorinador,modificarcuentasEstudianteCoordinador,eliminarCuentasEstudianteCoordinador,restablecerContraseñas,seleccionar,estudiante,coordinador);
+													nombreCorrdinador.setText("");
+												}												
+											}
+										});
+									}
+								});// fin boton borrar coordinador
+							}
+						});//fin boton eliminar cuentas
+						restablecerContraseñas.addActionListener(new ActionListener() {//inicio boton restablecer contraseñas
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								// TODO Auto-generated method stub
+								
+							}
+						});//fin boton restablecer contraseñas
+						
+					
 						
 						
 						
