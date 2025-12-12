@@ -1,3 +1,6 @@
+//DiegoGuerra_JoaquinBerenguela_Taller4POO 
+//Joaquin Berenguela Caimanque, 21.708.988-3
+
 package taller4;
 
 import java.awt.event.ActionEvent;
@@ -1307,3 +1310,4 @@ public class GUI extends JFrame{
 		
 
 }
+
