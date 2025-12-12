@@ -1,5 +1,5 @@
-//DiegoGuerra_JoaquinBerenguela_Taller4POO 
-//Joaquin Berenguela Caimanque, 21.708.988-3
+//DiegoGuerra_JoaquinBerenguela_Taller4POO ICCI
+//Joaquin Berenguela Caimanque, 21.708.988-3 ICCI
 
 
 
@@ -152,4 +152,5 @@ public class App {
 	
 
 }
+
 
