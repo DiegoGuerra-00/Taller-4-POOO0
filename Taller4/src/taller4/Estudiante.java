@@ -53,5 +53,14 @@ public class Estudiante {
 		this.contraseña = contraseña;
 	}
 	
-
+	@Override
+	public String toString() {
+		return "Rut de Estudiante: " + rut + 
+				"\n \n Nombre: " + nombre + 
+				"\n Carrera: " + carrera + 
+				"\n Semestre: " + semestre + 
+				"\n Correo electrónico: " + correoElectronico + 
+				"\n Contraseña: " + contraseña;
+	}
+	
 }

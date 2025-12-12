@@ -81,4 +81,7 @@ public interface Sistema {
 	void cambiarEstudiante(String rut, StrategyCambiodatos datos, String val);
 	void cambiarCoordinador(String nombre, StrategyCambiarDatosCoord datos, String valor);
 
+	
+	
+	public String obtenerRutPorContraseña(String contraseña);
 }

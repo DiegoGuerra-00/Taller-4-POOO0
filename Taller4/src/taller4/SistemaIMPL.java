@@ -256,15 +256,63 @@ public class SistemaIMPL implements Sistema{
 
 	@Override
 	public String visualizarInformaciónPersonalCompleta(String rut) {
-		// TODO Auto-generated method stub
-		return null;
+		for (Estudiante estudiante: listaEstudiantes) {
+			if(estudiante.getRut().equalsIgnoreCase(rut)) {
+				return estudiante.toString();
+			}
+		}
+		return "Este estudiante no existe";
 	}
-
+	
+	public String obtenerRutPorContraseña(String contraseña) {
+	    for (Estudiante e : listaEstudiantes) {
+	        if (e.getContraseña().equalsIgnoreCase(contraseña)) {
+	            return e.getRut();
+	        } 
+	       
+	    } 
+	    return "";
+	}	   
 
 	@Override
 	public String mostrarMallaCurricularConEstadoDeAsignatura(String rut) {
-		// TODO Auto-generated method stub
-		return null;
+
+	    String mensaje = "";
+	    Estudiante estudiante = null;
+
+	    for (Estudiante e : listaEstudiantes) {
+	        if (e.getRut().equalsIgnoreCase(rut)) {
+	            estudiante = e;
+	            break;
+	        }
+	    }
+
+	    if (estudiante == null)
+	        return "No existe el RUT";
+
+	    mensaje += "Malla Curricular de: " + estudiante.getNombre() + "\n\n";
+
+	    for (Curso c : listaCursos) {
+
+	        String estado = "Pendiente"; // valor por defecto
+	        String nrcCurso = c.getNrc();
+
+	        
+	        for (Nota n : listaNotas) {
+	            if (n.getRutEstudiante().equalsIgnoreCase(rut) &&
+	                n.getNrcAsignatura().equalsIgnoreCase(nrcCurso)) {
+
+	                estado = n.getEstadoasing();
+	                break;
+	            }
+	        }
+
+	        mensaje += c.getNombreCurso()
+	                + "   |   NRC: " + c.getNrc()
+	                + "   |   Estado: " + estado + "\n";
+	    }
+
+	    return mensaje;
 	}
 
 
